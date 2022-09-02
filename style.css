@@ -1,0 +1,22 @@
+/*Textfield*/
+.page-content {
+    padding: 0px 100px;
+}
+
+/* Icon List */
+.demo-list-control {
+    width: 300px;
+}
+  
+.demo-list-radio {
+    display: inline;
+}
+
+/* Icons */
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48
+}
