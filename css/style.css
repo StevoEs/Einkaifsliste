@@ -12,43 +12,57 @@ text-align: center;
     display: block;
     width: 300px;
     margin: 0 auto;
-    -webkit-box-shadow: 0px 0px 16px -2px rgba(0,0,0,0.27); 
-    box-shadow: 0px 0px 16px -2px rgba(0,0,0,0.27);
-}
-
-#product_image {
-  
 }
 
 #primary{
-    width: 200px;
+    width: 185px;
+    position: absolute;
+    display: block;
+    margin-left: 0px;
+    margin-right: auto;
 }
 
 #myInput{
-    width: 200px;
+    width: 190px;
 }
 
 #myInputLabel {
-
+    margin-left: 5px;
 }
 
-#add_btn {
+.product-text {
+    margin-left: 4px;
+    text-align: left;
+}
 
+
+
+#inputPreis {
+    width: 110px;
+    margin-right: 0px;
+    display: block;
+    margin-left: auto;
+}
+
+.product-preis {
+    margin-right: 30px;
+    margin-left: auto;
 }
 
 /************UL-LI*************/
-#myUl {
+.mdl-list__item {
+    width: 300px;
+    margin: 10px auto;
 }
 
-/* Produkt li */
-.mdl-list__item {
-    width: 300px !important;
-    margin: 0 auto !important;
-    margin-bottom: 10px !important;
-    -webkit-box-shadow: 0px 0px 16px -2px rgba(0,0,0,0.27); 
-    box-shadow: 0px 0px 16px -2px rgba(0,0,0,0.27);
+#product-container {
+    margin-bottom: 50px;
 }
-  
+
+.mdl-data-table {
+    margin: 0 auto;
+}
+
 
 .demo-list-radio {
     display: inline;
@@ -82,15 +96,7 @@ text-align: center;
 i.size-xl {
     font-size: 40px;
 }
-.product-text {
-    margin-left: 4px;
-}
 
-.mdl-checkbox {
-    height: auto !important;
-    margin-left: auto !important; 
-    margin-right: auto !important;
-}
 input[type="checkbox" i] {
     height: 20px;
     width: 20px;
@@ -106,19 +112,22 @@ input[type="checkbox" i] {
 
 /*-----Cards------*/
 #card {
-    display: none;
+    margin: 30px auto;
+}
+
+#card-header {
+    background-color: #006689;
+    color: #fff;
 }
 
 .mdl-card-square.mdl-card {
     width: 320px;
     height: 320px;
 }
-.mdl-card-square > .mdl-card__title {
-    color: #fff;
-    background:
-      url('../assets/demos/dog.png') bottom right 15% no-repeat #46B6AC;
-  }
+
 /*-----footer------*/
+
+
 .mdl-mini-footer {
     height: 20px;
   }
