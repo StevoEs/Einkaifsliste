@@ -1,0 +1,34 @@
+{
+    "products": [
+      {
+        "name": "Milch",
+        "preis": 1.09,
+        "id": 1001
+      },
+      {
+        "name": "Toast",
+        "preis": 0.99,
+        "id": 1002
+      },
+      {
+        "name": "Kaffe",
+        "preis": 2.99,
+        "id": 1003
+      },
+      {
+        "name": "Brot",
+        "preis": 0.99,
+        "id": 1004
+      },
+      {
+        "name": "Käse",
+        "preis": 2.79,
+        "id": 1005
+      },
+      {
+        "name": "Selter",
+        "preis": 0.25,
+        "id": 1006
+      }
+    ]
+  }
