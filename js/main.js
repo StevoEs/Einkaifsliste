@@ -1,85 +1,132 @@
+'use strict';
 /**********************************************************/
-/*               Produkt Item / MongoDB                   */
-/**********************************************************/
-let product = {
-  productName: 'Kaffe',
-  productPrice: '3,99'
-};
-
-/**********************************************************/
-/*               Produkt Item / MongoDB                   */
+/*                   Produkt Item List                    */
 /**********************************************************/
 // Create a new list item when clicking on the "Add" button
 function newElement() {
-  var li = document.createElement("li");
-  var inputValue = document.getElementById("myInput").value;
-  var t = document.createTextNode(inputValue);
-  li.className = "mdl-list__item";
-  //li.appendChild(t);
+  let li = document.createElement("li");
+  li.className = "mdl-list__item mdl-shadow--2dp";
+
+  let inputValue = document.getElementById("myInput").value;
+  let inputValuePrice = document.getElementById("myInput2").value;
+
   if (inputValue === '') {
     //show error Message
   } else {
-    document.getElementById("myUL").appendChild(li);
-  }
-  /*-----------Elemente Kreieren------------*/
-  var edit = document.createElement('i');
-  var spanPrimary = document.createElement('span');
-  var inputLabel = document.createElement('label');
-  var productName = document.createElement('span');
-  var spanSecondary = document.createElement('span');
-  var checkBox = document.createElement('input');
+    componentHandler.upgradeElement(li);
+    document.getElementById("product-list").appendChild(li);
 
-  /*-----------Element Klassen------------*/
+  }
+
+  /*-----------Elemente Kreieren------------*/
+  let edit = document.createElement('i');
+  let spanPrimary = document.createElement('span');
+  let inputLabel = document.createElement('label');
+  let productName = document.createElement('span');
+  let productPrice = document.createElement('span');
+  let spanSecondary = document.createElement('span');
+  let checkBox = document.createElement('input');
+  let closeBtn = document.createElement("span");
+  /*-----------Elemente einfügen------------*/
+  productName.appendChild(document.createTextNode(inputValue));
+  productPrice.appendChild(document.createTextNode(inputValuePrice + "€"));
+  spanPrimary.appendChild(productName);
+  spanPrimary.appendChild(productPrice);
+  inputLabel.appendChild(checkBox);
+  spanSecondary.appendChild(inputLabel);
+  li.appendChild(edit);
+  li.appendChild(spanPrimary);
+  li.appendChild(spanSecondary);
+  li.appendChild(closeBtn);
+  /*-----------Elemente klassifizieren------------*/
+  edit.className = "material-symbols-outlined icon-edit-document";
+  edit.textContent = 'edit_document';
   spanPrimary.className = "mdl-list__item-primary-content";
   spanSecondary.className = "mdl-list__item-secondary-action";
   inputLabel.className = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"; 
   productName.className = 'product-text';
+  productPrice.className = 'product-preis';
   checkBox.className = "mdl-checkbox__input";
-/*-----------Primary------------*/
-  li.appendChild(edit);
-  li.appendChild(spanPrimary);
-  spanPrimary.appendChild(productName);
-  productName.appendChild(t);
-  
-
-  /*-----------Secondary------------*/
-  li.appendChild(spanSecondary);
-  spanSecondary.appendChild(inputLabel);
-  inputLabel.appendChild(checkBox);
   checkBox.setAttribute('id', 'my-id');
   checkBox.setAttribute('type', 'checkbox');
+  closeBtn.className = "material-symbols-outlined hiding-list-item";
+  closeBtn.textContent = 'cancel';
+
 
 // Add a "edit" symbol when clicking on a list item
-edit.className = "material-symbols-outlined icon-edit-document";
-edit.textContent = 'edit_document';
-for (i = 0; i < edit.length; i++) {
-  edit[i].onlick = function() {
-    //updateItemPreisinDB
+let editieren = document.getElementsByClassName("icon-edit-document");
+for (let i = 0; i < editieren.length; i++) {
+  editieren[i].onlick = function() {
+    console.log('Produkt editieren');
   }
 }
-/*-------------Close Button-------------*/
-// Hinzufügen des Close Button
-  document.getElementById("myInput").value = "";
-  var span = document.createElement("span");
-  span.className = "material-symbols-outlined";
-  span.className += " hiding-list-item";
-  span.textContent = 'cancel';
-  li.appendChild(span);
+
 // Funktion close Button
-  var close = document.getElementsByClassName("hiding-list-item");
-  for (i = 0; i < close.length; i++) {
+  let close = document.getElementsByClassName("hiding-list-item");
+  for (let i = 0; i < close.length; i++) {
     close[i].onclick = function() {
-      var div = this.parentElement;
+      let div = this.parentElement;
       div.style.display = "none";
     }
   }
 
-  /*-------------Event Handler-------------*/
-var pressEnter = document.getElementById("myInput");
-pressEnter.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("add_btn").click();
-  }
-});
+/*------------------Summe----------------*/
+  let outputSumme = document.getElementById("summe");
+  outputSumme = parseFloat(inputValuePrice);
+  let sum = [];
+  sum.push(outputSumme);
+  console.log(sum);
 }
+
+/*-------------------Events----------------*/
+function catchEnter() {
+  const pressEnter = document.getElementById("myInput");
+  pressEnter.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("add_btn").click();
+    }
+  });
+  const pressEnter2 = document.getElementById("myInput2");
+  pressEnter2.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      document.getElementById("add_btn").click();
+    }
+  });
+}
+
+function clearField() {
+  document.getElementById("myInput").value = "";
+  document.getElementById("myInput2").value = "";
+}
+
+/**********************************************************/
+/*                      service worker                    */
+/***********************************************************/
+ 
+// Registrierung von service worker.
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./service.js').then(function(reg) {
+      console.log('Service worker wurde erfolgreich ausgeführt', reg);
+  }).catch(function(err) {
+      console.warn('Fehler beim erstellen vom service worker', err);
+  });
+}
+
+window.addEventListener('online', function(e) {
+  // Resync data with server.
+  console.log("Du bist online");
+}, false);
+
+window.addEventListener('offline', function(e) {
+  // Queue up events for server.
+  console.log("Du bist offline");
+}, false);
+
+
+let addButton = document.getElementById("add_btn");
+addButton.addEventListener("click", clearField);
+
+//document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', catchEnter);
