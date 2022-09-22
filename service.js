@@ -1,22 +1,21 @@
-// Use a cacheName for cache versioning
+// Verwenden Sie einen Cache-Namen für die Cache-Versionierung
 var cacheName = 'v1:static';
 
-// During the installation phase, you'll usually want to cache static assets.
+// Während der Installationsphase werden Sie in der Regel statische Inhalte zwischenspeichern wollen.
 self.addEventListener('install', function(e) {
-    // Once the service worker is installed, go ahead and fetch the resources to make this work offline.
+    // Sobald der Service Worker installiert ist, können Sie die Ressourcen abrufen, damit der Dienst offline funktioniert.
     e.waitUntil(
         caches.open(cacheName).then(function(cache) {
             return cache.addAll([
                 './',
                 './css/style.css',
                 './css/material.min.css',
-                './js/main.js',
+                './main.js',
                 './js/material.min.js',
                 './index.html',
                 './src/medikamentenapp/dia.html',
                 './src/medikamentenapp/medikamentenApp.js',
-                './src/medikamentenapp/style.css',
-                './product.json'
+                './src/medikamentenapp/style.css'
             ]).then(function() {
                 self.skipWaiting();
             });
@@ -24,16 +23,16 @@ self.addEventListener('install', function(e) {
     );
 });
 
-// when the browser fetches a URL…
+// Wenn der Browser eine URL aufruft...
 self.addEventListener('fetch', function(event) {
-    // … either respond with the cached object or go ahead and fetch the actual URL
+    // … entweder mit dem zwischengespeicherten Objekt antworten oder die tatsächliche URL abrufen
     event.respondWith(
         caches.match(event.request).then(function(response) {
             if (response) {
-                // retrieve from cache
+                // aus dem Cache abrufen
                 return response;
             }
-            // fetch as normal
+            // Normal fetch
             return fetch(event.request);
         })
     );
