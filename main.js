@@ -55,7 +55,7 @@ function makeTransaction(storeName, mode, callback = null) {
       newElement();
       };
     });
-  }, 500);
+  }, 1000);
     };
 
 // Einen Datensatz anzeigen (zum bearbeiten)
@@ -174,7 +174,7 @@ function newElement() {
   /*-----------Elemente einfügen------------*/
   li.setAttribute('data-key', element.id);
   productName.appendChild(document.createTextNode(element.title));
-  productPrice.appendChild(document.createTextNode(element.price));
+  productPrice.appendChild(document.createTextNode(element.price + " €"));
   spanPrimary.appendChild(productName);
   spanPrimary.appendChild(productPrice);
   inputLabel.appendChild(checkBox);
@@ -196,7 +196,7 @@ function newElement() {
   checkBox.setAttribute('id', 'my-id');
   checkBox.setAttribute('type', 'checkbox');
   closeBtn.className = "material-symbols-outlined hiding-list-item";
-  closeBtn.textContent = 'cancel';
+  closeBtn.textContent = 'close';
 
   componentHandler.upgradeElement(li);
   let list = document.getElementById("product-list").appendChild(li);
@@ -220,8 +220,7 @@ for (let i = 0; i < editieren.length; i++) {
 // Funktion für die Summierung der Produkt Preise
   let produktPreis = element.price
   sumPrice(produktPreis);
-
-    
+  
     }); 
 });
 request.addEventListener('error', (event) => {
@@ -231,10 +230,19 @@ request.addEventListener('error', (event) => {
 
 // Funktion Summierung 
 function sumPrice(produktPreis) {
-let sum = [];
-console.log(produktPreis);
-}
+  produktPreis = parseFloat(produktPreis);
+  let arr = [];
+  arr.push(produktPreis);
+  console.log(getSum(arr));
 
+function getSum(array) {
+  let sumOfElements = 0;
+  for (let i = 0; i < arr.length; i++) {
+      sumOfElements = sumOfElements + array[i];
+  }
+  return sumOfElements;
+}
+}
 /*-------------------Events----------------*/
 function catchEnter() {
   const pressEnter = document.getElementById("myInput");
@@ -252,8 +260,6 @@ function catchEnter() {
     }
   });
 }
-
-
 
 document.addEventListener('DOMContentLoaded', catchEnter);
 window.addEventListener('load', loadProducts);
