@@ -1,7 +1,5 @@
 'use strict';
-/**********************************************************/
-/*                         indexedDB                      */
-/**********************************************************/
+//indexedDB öffnen und Initialisieren
 //Datenbank öffnen
 const dbRequest = window.indexedDB.open("myDB", 1);
 let db = null;
@@ -42,7 +40,6 @@ function makeTransaction(storeName, mode, callback = null) {
 }
 
 // Produkt abfrage
-
   function loadProducts() {
     setTimeout(() => {
     let products = makeTransaction('produkte', "readonly");
@@ -53,11 +50,30 @@ function makeTransaction(storeName, mode, callback = null) {
         console.log("keine Produkte");
       } else {
       newElement();
+      getSum();
       };
     });
   }, 1000);
     };
 
+
+  // Gesamtpreis berechnung (Summe)
+  function getSum() {
+    let products = makeTransaction('produkte', "readonly");
+    let request = products.getAll();
+    request.addEventListener('success', (event) => {
+      event.preventDefault();
+        let data = event.target.result;
+        let produktPreise = 0;
+        for (let i = 0; i < data.length; i++) {
+          produktPreise = produktPreise + parseFloat(data[i].price);
+        }
+        console.log(produktPreise);
+        let summe = document.querySelector("#summe");
+        summe.innerHTML = produktPreise.toFixed(2);
+    });
+    };
+/*
 // Einen Datensatz anzeigen (zum bearbeiten)
 function showProducts(productId) {
   let products = makeTransaction("produkte", "readonly");
@@ -72,7 +88,7 @@ function showProducts(productId) {
     console.log(event.target.error);
   });
 }
-
+*/
 // Neuen Datensatz
 document.querySelector("#add_btn").addEventListener('click', (event) => {
   event.preventDefault();
@@ -94,29 +110,12 @@ document.querySelector("#add_btn").addEventListener('click', (event) => {
     document.querySelector('#myForm').reset();
     document.getElementById("myInput").select();
     newElement();
+    getSum();
   });
   request.addEventListener("error", (event) => {
     console.log(event.target.error);
   }); };
 });
-
-// Datensatz löschen
-function deleteProduct() {
-    let list = document.querySelector("li");
-    let productId = list.getAttribute("data-key");
-
-    let products = makeTransaction("produkte", "readwrite");
-    let request = products.delete(parseInt(productId));
-    request.addEventListener("success", (event) => {
-      document.querySelector(`li[data-key="${productId}"]`).remove();
-      list.removeAttribute("data-key");
-      console.log("Erfolgreich gelöscht");
-    });
-    request.addEventListener("error", (event) => {
-      console.log(event.target.error);
-    });
- 
-};
 
 // Datensatz aktualisieren
 document.querySelector("#add_btn").addEventListener('click', (event) => {
@@ -139,6 +138,7 @@ document.querySelector("#add_btn").addEventListener('click', (event) => {
       document.querySelector('#myForm').reset();
       document.getElementById("myInput").select();
       newElement();
+      getSum();
     });
     request.addEventListener("error", (event) => {
       console.log(event.target.error);
@@ -148,7 +148,6 @@ document.querySelector("#add_btn").addEventListener('click', (event) => {
 /**********************************************************/
 /*                Produkt Liste Erstellen                 */
 /**********************************************************/
-
 // Alle Datensätze anzeigen (für Liste)
 function newElement() {
 
@@ -192,7 +191,7 @@ function newElement() {
   inputLabel.className = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"; 
   productName.className = 'product-text';
   productPrice.className = 'product-preis';
-  checkBox.className = "mdl-checkbox__input";
+  checkBox.className = "mdl-checkbox__input mdl-js-ripple-effect mdl-js-checkbox";
   checkBox.setAttribute('id', 'my-id');
   checkBox.setAttribute('type', 'checkbox');
   closeBtn.className = "material-symbols-outlined hiding-list-item";
@@ -205,7 +204,7 @@ function newElement() {
 let editieren = document.getElementsByClassName("icon-edit-document");
 for (let i = 0; i < editieren.length; i++) {
   editieren[i].onclick = function() {
-    showProducts(element.id);
+    let produktId = this.parentElement.getAttribute("data-key");
   }
 }
 
@@ -213,36 +212,31 @@ for (let i = 0; i < editieren.length; i++) {
   let close = document.getElementsByClassName("hiding-list-item");
   for (let i = 0; i < close.length; i++) {
     close[i].onclick = function() {
-      deleteProduct();
+      let productId = this.parentElement.getAttribute("data-key");
+      let products = makeTransaction("produkte", "readwrite");
+      let request = products.delete(parseInt(productId));
+      request.addEventListener("success", (event) => {
+        document.querySelector(`li[data-key="${productId}"]`).remove();
+        list.removeAttribute("data-key");
+        console.log("Erfolgreich gelöscht");
+        newElement();
+        getSum();
+      });
+      request.addEventListener("error", (event) => {
+        console.log(event.target.error);
+      });
     }
   }
 
-// Funktion für die Summierung der Produkt Preise
-  let produktPreis = element.price
-  sumPrice(produktPreis);
-  
     }); 
 });
 request.addEventListener('error', (event) => {
   console.log(event.target.error);
 });
-}/*-------------------Ende createElement----------------*/
-
-// Funktion Summierung 
-function sumPrice(produktPreis) {
-  produktPreis = parseFloat(produktPreis);
-  let arr = [];
-  arr.push(produktPreis);
-  console.log(getSum(arr));
-
-function getSum(array) {
-  let sumOfElements = 0;
-  for (let i = 0; i < arr.length; i++) {
-      sumOfElements = sumOfElements + array[i];
-  }
-  return sumOfElements;
 }
-}
+/*-------------------Ende createElement----------------*/
+
+
 /*-------------------Events----------------*/
 function catchEnter() {
   const pressEnter = document.getElementById("myInput");
@@ -264,10 +258,8 @@ function catchEnter() {
 document.addEventListener('DOMContentLoaded', catchEnter);
 window.addEventListener('load', loadProducts);
 
-/**********************************************************/
-/*                      service worker                    */
-/***********************************************************/
- 
+
+// service worker
 // Registrierung von service worker.
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./service.js').then(function(reg) {
@@ -286,4 +278,30 @@ window.addEventListener('offline', function(e) {
   // Ereignisse für den Server in die Warteschlange stellen.
   console.log("Du bist offline");
 }, false);
+
+
+// switch Light Theme or Dark Theme
+window.addEventListener('load', (event) => {
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+  if (mediaQuery.matches) {
+    const themeToggle = document.getElementById('switch-2');
+    themeToggle.checked = true;
+    let theme = document.getElementsByTagName('link')[7];
+    theme.setAttribute('href', './css/dark-theme.css');
+    console.log("Dark Theme erkannt");
+  }
+});
+
+
+const themeToggle = document.getElementById('switch-2');
+
+themeToggle.addEventListener('change', (event) => {
+  let theme = document.getElementsByTagName('link')[7];
+  if(event.target.checked === true) {
+    theme.setAttribute('href', './css/dark-theme.css');
+  }
+  if(event.target.checked === false) {
+    theme.setAttribute('href', './css/light-theme.css');
+    }
+  });
 
