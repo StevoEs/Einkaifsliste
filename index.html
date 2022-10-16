@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo</title>
+    <title>Einkaufsliste</title>
     <link rel="manifest" href="./manifest.json">
     <meta name="LGIT" content="Einkaufsliste">
     <meta name="description" content="Eine praktische Einkaufsliste">
     <meta name="keywords" content="ToDo, Einkaufen, Einkaufsliste, Aufgabenliste">
+    <meta name="author" content="Stefan Studenski">
     <meta name="theme-color" content="#00629f"/>
 
-    <link rel="icon" sizes="512x512" href="./src/img/lgit-icon-512-512.png">
-    <link rel="icon" sizes="128x128" href="./src/img/lgit-icon-128x128.png">
-    <link rel="icon" sizes="64x64" href="./src/img/lgit-icon-64x64.png">
-    <link rel="fav-icon" href="./src/img/lgit-icon-64x64.png" type="image/png" />
-    <link rel="apple-touch-icon" href="./src/img/lgit-icon-apple-180x180.png">
+    <link rel="icon" sizes="512x512" href="./src/img/icon-512-512.png">
+    <link rel="icon" sizes="128x128" href="./src/img/icon-128x128.png">
+    <link rel="icon" sizes="64x64" href="./src/img/icon-64x64.png">
+    <link rel="fav-icon" href="./src/img/icon-64x64.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./src/img/icon-apple-180x180.png">
 
     <link rel="stylesheet" href="./css/style.css" type="text/css">
-    <link rel="stylesheet" href="./css/main.css" type="text/css">
-    <link rel="stylesheet" href="./css/bundle.css" type="text/css">
+    <link rel="stylesheet" href="./css/light-theme.css" type="text/css">
     <link rel="stylesheet" href="./css/material.min.css" type="text/css">
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -31,6 +31,13 @@
         <div class="mdl-layout__header-row">
             <!-- Title -->
             <span class="mdl-layout-title">Menü</span>
+            <div id="theme-shwitch">
+                <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" id="theme-shwitch" for="switch-2">
+                    <input type="checkbox" id="switch-2" class="mdl-switch__input">
+                    <span class="mdl-switch__label"></span>
+                    <span class="mdl-switch__label__text">Dark Mode</span>
+                </label>
+            </div>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation. We hide it in small screens. -->
@@ -49,13 +56,12 @@
             <a class="mdl-navigation__link" href="./index.html">Archiv</a>
             <a class="mdl-navigation__link" href="./index.html">Produkte</a>
             <a class="mdl-navigation__link" href="./index.html">Statistiken</a>
-            <a class="mdl-navigation__link" href="./src/medikamentenapp/dia.html">App</a>
         </nav>
     </div>
     <main class="mdl-layout__content">
 
     <div class="page-content">
-        <h1>Einkaufsliste</h1>
+        <h1 class="main-header">Einkaufsliste</h1>
         <form id="myForm" class="mdl-shadow--2dp">  
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="primary">
                 <input class="mdl-textfield__input" type="text" id="myInput">
@@ -73,50 +79,32 @@
         <div id="rechnungsblock">
             <span class="mdl-chip mdl-chip--contact">
                 <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white">€</span>
-                <span class="mdl-chip__text" id="summe"></span>
+                <span class="mdl-chip__text" id="summe">0.00</span>
             </span>
         </div>
-    </div>
-    <hr>
+        <hr>
         <div class="mdl-card-square mdl-card mdl-shadow--2dp" id="card">
             <div class="mdl-card__title mdl-card--expand" id="card-header">
-              <h2 class="mdl-card__title-text">Update</h2>
+                <h2 class="mdl-card__title-text">Update</h2>
             </div>
             <div class="mdl-card__supporting-text">
-                Es wurde ein service worker registriert, der die Webseite
-                installiertbar macht. Die Tabelle wurde vorerst entfernt.
-                Die folgenden updates sollen ein speichern in die indexedDB
-                ermöglichen. Dann wird der Tabellen inhalt wieder angezeigt.
+                Neu<br>
+                Dark Mode wurde hinzugefügt.<hr><br>
+                Geplante Updates: <br>
+                Fehler beim Editieren der Produkte.<br>
+                <time>12.Oktober.2020</time>
             </div>
             <div class="mdl-card__actions mdl-card--border">
-              <a href="https://github.com/StevoEs/Einkaufsliste" target="_blank" rel="noopener noreferrer" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                View Code
-              </a>
+                <a href="https://github.com/StevoEs/Einkaufsliste" target="_blank" rel="noopener noreferrer" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    View Code
+                </a>
             </div>
         </div>
+    </div>
+
     </main>
-    <footer class="mdl-mini-footer mdl-layout.is-small-screen mdl-layout--large-screen-only">
-        <div class="mdl-mini-footer__right-section">
-            <button class="mdl-mini-footer__social-btn">
-                <span class="material-symbols-outlined">
-                share
-                </span>
-            </button>
-            <button class="mdl-mini-footer__social-btn">
-                <span class="material-symbols-outlined">
-                    print
-                </span>
-            </button>
-            <button class="mdl-mini-footer__social-btn"> 
-                <span class="material-symbols-outlined">
-                    mail
-                </span>
-            </button>
-        </div>
-      </footer>
 </div>
 <script type="module" src="./main.js"></script>
 <script defer type="module" src="./js/material.min.js"></script>
 </body>
 </html>
-
