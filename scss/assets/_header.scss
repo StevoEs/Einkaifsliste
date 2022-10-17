@@ -1,0 +1,26 @@
+#theme-shwitch {
+    display: block;
+    margin-left: 30px;
+}
+
+.mdl-switch.is-checked .mdl-switch__thumb {
+    background: $secondary !important;
+}
+
+.mdl-switch.is-checked .mdl-switch__track {
+    background: $secondary !important;
+}
+
+.main-header {
+    font-family: $font-main;
+}
+
+.mdl-layout__header {
+    background-color: $primary !important;
+}
+
+
+.button {
+    color: #333;
+    font-size: 1rem;
+}

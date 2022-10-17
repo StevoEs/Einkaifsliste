@@ -1,0 +1,79 @@
+body {
+    text-align: center;
+    }
+
+.page-content {
+    padding: 0px 10px;
+    margin: auto;
+}
+
+.demo-list-radio {
+    display: inline;
+}
+
+$color-map: (
+    light0: #000000,
+    light10: #001d34,
+    light20: #003355,
+    light25: #003e67,
+    light30: #004a79,
+    light35: #00568c,
+    light40: #00629f,
+    light50: #2a7bbc,
+    light60: #4b95d8,
+    light70: #69b0f5,
+    light80: #9acbff,
+    light90: #cfe4ff,
+    light95: #e9f1ff,
+    light98: #f8f9ff,
+    light99: #fcfcff,
+);   
+
+@mixin color-utilities($proberty: "color") {
+    @each $name, $hex in $color-map {
+        &-#{$name} {
+            #{$proberty}: #{$hex};
+        }
+    }
+}
+
+
+.color-theme {
+    @include color-utilities();
+}
+.color-theme {
+    @include color-utilities();
+}
+.color-theme {
+    @include color-utilities();
+}
+
+
+$spacing-proberty-map: (
+    "p": padding,
+    "pt": padding-top,
+    "pr": padding-right,
+    "pb": padding-bottom,
+    "pl": padding-left,
+    "px": (
+        padding-left,
+        padding-right,
+    ),
+    "py": (
+        padding-top,
+        padding-bottom,
+    ),
+);
+
+$spacing-sizes: 0, 8, 16, 24, 32, 40, 48, 56, 64;
+$spacing-unit: "px";
+
+@each $class, $value in $spacing-proberty-map {
+    @each $size in $spacing-sizes {
+        .#{$class}-#{$size} {
+            @each $subvalue in $value {
+                #{$subvalue}: #{$size}#{$spacing-unit};
+            }
+        }
+    }
+}

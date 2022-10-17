@@ -1,0 +1,97 @@
+#myForm {
+    display: block;
+    width: 300px;
+    margin: 0 auto;
+    background-color: $form;
+}
+
+#primary{
+    width: 185px;
+    position: absolute;
+    display: block;
+    margin-left: 0px;
+    margin-right: auto;
+}
+
+#myInput{
+    width: 190px;
+    padding-left: 0.5rem;
+}
+
+#myInputLabel {
+    margin-left: 5px;
+}
+
+#inputPreis {
+    width: 110px;
+    margin-right: 0px;
+    display: block;
+    margin-left: auto;
+}
+
+.product-text {
+  font-family: $font-list;
+  font-weight: 400;
+  font-size: 1.2rem;
+  width: 60%;
+  margin-left: 4px;
+  text-align: left;
+}
+
+.product-preis {
+  font-family: $font-list;
+  font-size: 1.2rem;
+  margin-right: 10px;
+  margin-left: auto;
+}
+
+#summe {
+  font-family: $font-list;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+input[type="checkbox" i] {
+    height: 100%;
+    width: 20px;
+    margin: auto;
+    margin-right: 20px;
+}
+
+.mdl-button--fab.mdl-button--colored {
+    background: $secondary !important;
+}
+
+[type="checkbox"] + label::before {
+  accent-color: $secondary !important;
+  filter: hue-rotate(90deg);
+}
+input[type=checkbox] {
+  accent-color: $secondary !important;
+  transform: scale(1);
+  cursor: pointer;
+}
+
+.mdl-textfield--floating-label .mdl-textfield__label {
+    color: $secondary;
+  }
+
+.mdl-textfield__input {
+    color: $input-text !important;
+}
+  
+  .mdl-textfield--floating-label.is-focused .mdl-textfield__label, 
+  .mdl-textfield--floating-label.is-dirty .mdl-textfield__label, 
+  .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label {
+    color: $primary !important;
+  }
+  
+  .mdl-textfield__label:after {
+    background-color: $primary !important;
+  }
+
+  .mdl-textfield--floating-label.is-focused .mdl-textfield__label, 
+  .mdl-textfield--floating-label.is-dirty .mdl-textfield__label, 
+  .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label {
+    color: $input-text !IMPORTANT;
+}

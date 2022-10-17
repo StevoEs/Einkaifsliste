@@ -164,7 +164,6 @@ function newElement() {
   let li = document.createElement("li");
   let edit = document.createElement('i');
   let spanPrimary = document.createElement('span');
-  let inputLabel = document.createElement('label');
   let productName = document.createElement('span');
   let productPrice = document.createElement('span');
   let spanSecondary = document.createElement('span');
@@ -176,19 +175,17 @@ function newElement() {
   productPrice.appendChild(document.createTextNode(element.price + " €"));
   spanPrimary.appendChild(productName);
   spanPrimary.appendChild(productPrice);
-  inputLabel.appendChild(checkBox);
-  spanSecondary.appendChild(inputLabel);
-  li.appendChild(edit);
+  spanSecondary.appendChild(closeBtn);
+  li.appendChild(checkBox);
   li.appendChild(spanPrimary);
   li.appendChild(spanSecondary);
-  li.appendChild(closeBtn);
   /*-----------Elemente klassifizieren------------*/
   li.className = "mdl-list__item mdl-shadow--2dp";
   edit.className = "material-symbols-outlined icon-edit-document";
   edit.textContent = 'edit_document';
   spanPrimary.className = "mdl-list__item-primary-content";
   spanSecondary.className = "mdl-list__item-secondary-action";
-  inputLabel.className = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"; 
+  //inputLabel.className = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"; 
   productName.className = 'product-text';
   productPrice.className = 'product-preis';
   checkBox.className = "mdl-checkbox__input mdl-js-ripple-effect mdl-js-checkbox";

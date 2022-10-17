@@ -1,0 +1,30 @@
+{
+    "lang": "de",
+    "dir": "ltr",
+    "name": "Einkaufsliste",
+    "short_name": "Liste",
+    "icons": [{
+      "src": "./src/img/icon-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }, {
+      "src": "./src/img/icon-128x128.png",
+      "sizes": "128x128"
+    }, {
+      "src": "./src/img/icon-512-512.png",
+      "sizes": "512x512"
+    }, {
+      "src": "./src/img/icon-512-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }],
+    "scope": "/",
+    "id": "/",
+    "start_url": "./index.html",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "description": "Eine Einkaufsliste im Material Design",
+    "theme_color": "#00629f",
+    "background_color": "#001e2c"
+  }

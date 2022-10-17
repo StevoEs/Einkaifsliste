@@ -10,12 +10,11 @@ self.addEventListener('install', function(e) {
                 './',
                 './css/style.css',
                 './css/material.min.css',
+                './css/light-theme.css',
+                './css/dark-theme.css',
                 './main.js',
                 './js/material.min.js',
-                './index.html',
-                './src/medikamentenapp/dia.html',
-                './src/medikamentenapp/medikamentenApp.js',
-                './src/medikamentenapp/style.css'
+                './index.html'
             ]).then(function() {
                 self.skipWaiting();
             });
