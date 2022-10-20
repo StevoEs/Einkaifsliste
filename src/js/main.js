@@ -1,4 +1,8 @@
 'use strict';
+import './../scss/dark-theme.scss'
+import './../scss/light-theme.scss'
+
+
 //indexedDB öffnen und Initialisieren
 //Datenbank öffnen
 const dbRequest = window.indexedDB.open("myDB", 1);
@@ -258,7 +262,7 @@ function catchEnter() {
 document.addEventListener('DOMContentLoaded', catchEnter);
 window.addEventListener('load', loadProducts);
 
-
+/*
 // service worker
 // Registrierung von service worker.
 if ('serviceWorker' in navigator) {
@@ -278,7 +282,7 @@ window.addEventListener('offline', function(e) {
   // Ereignisse für den Server in die Warteschlange stellen.
   console.log("Du bist offline");
 }, false);
-
+*/
 
 // switch Light Theme or Dark Theme
 window.addEventListener('load', (event) => {
@@ -287,7 +291,7 @@ window.addEventListener('load', (event) => {
     const themeToggle = document.getElementById('switch-2');
     themeToggle.checked = true;
     let theme = document.getElementsByTagName('link')[7];
-    theme.setAttribute('href', './css/dark-theme.css');
+    theme.setAttribute('href', './../scss/dark-theme.scss');
     console.log("Dark Theme erkannt");
   }
 });
@@ -298,9 +302,9 @@ const themeToggle = document.getElementById('switch-2');
 themeToggle.addEventListener('change', (event) => {
   let theme = document.getElementsByTagName('link')[7];
   if(event.target.checked === true) {
-    theme.setAttribute('href', './css/dark-theme.css');
+    theme.setAttribute('href', './../scss/dark-theme.scss');
   }
   if(event.target.checked === false) {
-    theme.setAttribute('href', './css/light-theme.css');
+    theme.setAttribute('href', './../scss/light-theme.scss');
     }
   });

@@ -8,11 +8,11 @@ self.addEventListener('install', function(e) {
         caches.open(cacheName).then(function(cache) {
             return cache.addAll([
                 './',
-                './css/style.css',
-                './css/material.min.css',
-                './css/light-theme.css',
-                './css/dark-theme.css',
-                './main.js',
+                './../css/style.css',
+                './../css/material.min.css',
+                './scss/light-theme.scss',
+                './scss/dark-theme.scss',
+                './js/main.js',
                 './js/material.min.js',
                 './index.html'
             ]).then(function() {
